@@ -1,0 +1,4 @@
+include:
+  - project: investsuite/devops/ci-cd/gitlab-ci-templates
+    file: /gitlab-ci/backend-lib-pipeline.yml
+    ref: master
