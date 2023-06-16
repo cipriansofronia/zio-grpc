@@ -32,6 +32,7 @@ class GreeterWithDatabase(database: UserDatabase) extends Greeter {
     database.fetchUser(request.name).map { user =>
       HelloReply(s"Hello ${user.name}")
     }
+  override def streamSayHello(request: HelloRequest): stream.Stream[StatusException, HelloReply] = ???
 }
 
 object GreeterWithDatabase {

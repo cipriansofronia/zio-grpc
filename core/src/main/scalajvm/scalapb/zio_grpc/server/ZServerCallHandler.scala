@@ -82,7 +82,8 @@ object ZServerCallHandler {
     unaryInput[Req, Res](
       runtime,
       (req: Req, requestContext: RequestContext, call: ZServerCall[Res]) =>
-        serverStreamingWithBackpressure(call, impl(req, requestContext))
+//        serverStreamingWithBackpressure(call, impl(req, requestContext))
+        impl(req, requestContext).foreach(call.sendMessage)
     )
 
   def clientStreamingCallHandler[Req, Res](
@@ -100,7 +101,8 @@ object ZServerCallHandler {
   ): ServerCallHandler[Req, Res] =
     streamingInput[Req, Res](
       runtime,
-      (req, requestContext, call) => serverStreamingWithBackpressure(call, impl(req, requestContext))
+//      (req, requestContext, call) => serverStreamingWithBackpressure(call, impl(req, requestContext))
+      (req, requestContext, call) => impl(req, requestContext).foreach(call.sendMessage)
     )
 
   def serverStreamingWithBackpressure[Res](
